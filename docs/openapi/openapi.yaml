@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8083
+  description: Generated server url
+paths:
+  /student/create:
+    post:
+      tags:
+      - student-controller
+      operationId: createStudent
+      parameters:
+      - name: requestDto
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/StudentRequestDto"
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StudentResponseDto"
+  /student/get:
+    get:
+      tags:
+      - student-controller
+      operationId: getAllStudent
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StudentResponseDto"
+  /history/get:
+    get:
+      tags:
+      - history-controller
+      operationId: getAllHistories
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HistoryDto"
+  /student/delete:
+    delete:
+      tags:
+      - student-controller
+      operationId: deleteStudent
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+  /history/delete:
+    delete:
+      tags:
+      - history-controller
+      operationId: deleteHistory
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    StudentRequestDto:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+    StudentResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        code:
+          type: string
+    HistoryDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        module:
+          type: string
+        identifier:
+          type: integer
+          format: int64
+        title:
+          type: string
+        description:
+          type: string

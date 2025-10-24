@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
     History findByTitle(String title);
+    History findByModuleAndIdentifier(String module, String identifier);
 }
